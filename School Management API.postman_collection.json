@@ -1,0 +1,462 @@
+{
+	"info": {
+		"_postman_id": "15ebb95d-4f39-4917-9a9a-47e357b35e9a",
+		"name": "School Management API",
+		"description": "**Project Overview:**  \nThe School Management API is a RESTful service that allows users to manage and interact with school data. The API supports operations to add new schools, retrieve a list of schools, and find schools based on geographical coordinates. Schools have attributes such as name, address, latitude, and longitude. The API is designed to facilitate easy management and retrieval of school information.\n\n**Base URL:**  \nThe API is hosted on Render, and the frontend is deployed on Vercel.\n\n**Key Features:**\n\n- **Add School**: Allows users to add new school details to the database.\n    \n- **Get Schools**: Retrieves a list of all registered schools.\n    \n- **Search Schools by Location**: Enables users to search for schools near a specific latitude and longitude, returning results sorted by proximity.\n    \n\n**Authentication:**  \nCurrently, the API does not require authentication, making it accessible for testing and development purposes.\n\n**Endpoints:**\n\n1. **POST /schools** - Add a new school to the database.\n    \n2. **GET /schools** - Retrieve all schools.\n    \n3. **GET /schools/search** - Search for schools near a given location (latitude and longitude).\n    \n\n**Response Format:**  \nAll responses are returned in JSON format.\n\n**Error Handling:**  \nThe API includes error handling for invalid requests, such as missing required fields or invalid latitude/longitude coordinates. In such cases, appropriate error messages and status codes are returned.\n\n**Dependencies:**\n\n- **Backend**: Node.js, Express\n    \n- **Database**: MySQL\n    \n- **Frontend**: React (for interaction and visualization)\n    \n\n**Deployment:**\n\n- **Frontend**: Deployed on Vercel\n    \n- **Backend**: Deployed on Render\n    \n\nThis collection includes example requests and expected responses for each endpoint, allowing stakeholders to test and interact with the API effectively.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25676359"
+	},
+	"item": [
+		{
+			"name": "List School API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>ID</th>",
+							"        <th>Name</th>",
+							"        <th>Address</th>",
+							"        <th>Latitude</th>",
+							"        <th>Longitude</th>",
+							"        <th>Distance</th>",
+							"    </tr>",
+							"    ",
+							"    {{#each response.data}}",
+							"        <tr id=row_{{@key}}>",
+							"            <td>{{id}}</td>",
+							"            <td>{{name}}</td>",
+							"            <td>{{address}}</td>",
+							"            <td>{{latitude}}</td>",
+							"            <td>{{longitude}}</td>",
+							"            <td>{{DISTANCE}}</td>",
+							"        </tr>",
+							"    {{/each}}",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return {response: pm.response.json()}",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://school-management-api-8q9d.onrender.com/listSchools?latitude=1&longitude=1",
+					"protocol": "https",
+					"host": [
+						"school-management-api-8q9d",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"listSchools"
+					],
+					"query": [
+						{
+							"key": "latitude",
+							"value": "1",
+							"description": "Location coordinates"
+						},
+						{
+							"key": "longitude",
+							"value": "1",
+							"description": "Location coordinates"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Test Case 1",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://school-management-api-8q9d.onrender.com/listSchools?latitude=1&longitude=1",
+							"protocol": "https",
+							"host": [
+								"school-management-api-8q9d",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"listSchools"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "1",
+									"description": "Location coordinates"
+								},
+								{
+									"key": "longitude",
+									"value": "1",
+									"description": "Location coordinates"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 26 Aug 2024 07:13:26 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "486"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Ray",
+							"value": "8b9204e559d75a1d-DEL"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3cc-dxSQ0ZbkmXDMqQUShcm/a0mZ+ZU\""
+						},
+						{
+							"key": "Vary",
+							"value": "Origin, Accept-Encoding"
+						},
+						{
+							"key": "rndr-id",
+							"value": "3d086224-089d-472b"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 7,\n            \"name\": \"KV 1\",\n            \"address\": \"Ramadevi Kanpur\",\n            \"latitude\": -11,\n            \"longitude\": 12,\n            \"DISTANCE\": 16.278820596099706\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Riverdale Elementary\",\n            \"address\": \"456 Oak Ave, Riverdale, NY\",\n            \"latitude\": -73.91210174560547,\n            \"longitude\": 40.89849853515625,\n            \"DISTANCE\": 84.87469100564556\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Green Valley High School\",\n            \"address\": \"123 Elm St, Springfield, IL\",\n            \"latitude\": -89.65010070800781,\n            \"longitude\": 39.781700134277344,\n            \"DISTANCE\": 98.59746966163465\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Mountainview Academy\",\n            \"address\": \"789 Pine Rd, Mountainview, CO\",\n            \"latitude\": 39.739200592041016,\n            \"longitude\": -104.99030303955078,\n            \"DISTANCE\": 112.84799511256813\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Lakeside Middle School\",\n            \"address\": \"101 Maple Ln, Lakeside, CA\",\n            \"latitude\": 32.85749816894531,\n            \"longitude\": -116.92220306396484,\n            \"DISTANCE\": 122.14968753559427\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Sunset High\",\n            \"address\": \"202 Beach Blvd, Santa Monica, CA\",\n            \"latitude\": 34.019500732421875,\n            \"longitude\": -118.49120330810547,\n            \"DISTANCE\": 123.96949260458157\n        }\n    ]\n}"
+				},
+				{
+					"name": "Test Case 2",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://school-management-api-8q9d.onrender.com/listSchools?latitude=2.45&longitude=-1.2",
+							"protocol": "https",
+							"host": [
+								"school-management-api-8q9d",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"listSchools"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "2.45",
+									"description": "Location coordinates"
+								},
+								{
+									"key": "longitude",
+									"value": "-1.2",
+									"description": "Location coordinates"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 26 Aug 2024 07:18:34 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "486"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Ray",
+							"value": "8b920c6d9a85547d-DEL"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3cc-dxSQ0ZbkmXDMqQUShcm/a0mZ+ZU\""
+						},
+						{
+							"key": "Vary",
+							"value": "Origin, Accept-Encoding"
+						},
+						{
+							"key": "rndr-id",
+							"value": "592c9e0b-c43d-42de"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 7,\n            \"name\": \"KV 1\",\n            \"address\": \"Ramadevi Kanpur\",\n            \"latitude\": -11,\n            \"longitude\": 12,\n            \"DISTANCE\": 16.278820596099706\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Riverdale Elementary\",\n            \"address\": \"456 Oak Ave, Riverdale, NY\",\n            \"latitude\": -73.91210174560547,\n            \"longitude\": 40.89849853515625,\n            \"DISTANCE\": 84.87469100564556\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Green Valley High School\",\n            \"address\": \"123 Elm St, Springfield, IL\",\n            \"latitude\": -89.65010070800781,\n            \"longitude\": 39.781700134277344,\n            \"DISTANCE\": 98.59746966163465\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Mountainview Academy\",\n            \"address\": \"789 Pine Rd, Mountainview, CO\",\n            \"latitude\": 39.739200592041016,\n            \"longitude\": -104.99030303955078,\n            \"DISTANCE\": 112.84799511256813\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Lakeside Middle School\",\n            \"address\": \"101 Maple Ln, Lakeside, CA\",\n            \"latitude\": 32.85749816894531,\n            \"longitude\": -116.92220306396484,\n            \"DISTANCE\": 122.14968753559427\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Sunset High\",\n            \"address\": \"202 Beach Blvd, Santa Monica, CA\",\n            \"latitude\": 34.019500732421875,\n            \"longitude\": -118.49120330810547,\n            \"DISTANCE\": 123.96949260458157\n        }\n    ]\n}"
+				},
+				{
+					"name": "Test Case 3",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://school-management-api-8q9d.onrender.com/listSchools?latitude=-29.45&longitude=33.56",
+							"protocol": "https",
+							"host": [
+								"school-management-api-8q9d",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"listSchools"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "-29.45",
+									"description": "Location coordinates"
+								},
+								{
+									"key": "longitude",
+									"value": "33.56",
+									"description": "Location coordinates"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 26 Aug 2024 07:19:06 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "486"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Ray",
+							"value": "8b920d394aa9547d-DEL"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3cb-aGNOHShs1cUYlF6m9YqQUgWM3ts\""
+						},
+						{
+							"key": "Vary",
+							"value": "Origin, Accept-Encoding"
+						},
+						{
+							"key": "rndr-id",
+							"value": "f37417cf-4038-48df"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 7,\n            \"name\": \"KV 1\",\n            \"address\": \"Ramadevi Kanpur\",\n            \"latitude\": -11,\n            \"longitude\": 12,\n            \"DISTANCE\": 18.84522485936424\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Riverdale Elementary\",\n            \"address\": \"456 Oak Ave, Riverdale, NY\",\n            \"latitude\": -73.91210174560547,\n            \"longitude\": 40.89849853515625,\n            \"DISTANCE\": 87.19778759762632\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Green Valley High School\",\n            \"address\": \"123 Elm St, Springfield, IL\",\n            \"latitude\": -89.65010070800781,\n            \"longitude\": 39.781700134277344,\n            \"DISTANCE\": 100.80639015618509\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Mountainview Academy\",\n            \"address\": \"789 Pine Rd, Mountainview, CO\",\n            \"latitude\": 39.739200592041016,\n            \"longitude\": -104.99030303955078,\n            \"DISTANCE\": 110.2855905630253\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Lakeside Middle School\",\n            \"address\": \"101 Maple Ln, Lakeside, CA\",\n            \"latitude\": 32.85749816894531,\n            \"longitude\": -116.92220306396484,\n            \"DISTANCE\": 119.65050867786533\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Sunset High\",\n            \"address\": \"202 Beach Blvd, Santa Monica, CA\",\n            \"latitude\": 34.019500732421875,\n            \"longitude\": -118.49120330810547,\n            \"DISTANCE\": 121.46546731461463\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Add School",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://school-management-api-8q9d.onrender.com/addSchool?name=Ocean Breeze High School&address=707 Coastal Highway, Miami, FL&latitude=25.7617&longitude=-80.1918",
+					"protocol": "https",
+					"host": [
+						"school-management-api-8q9d",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"addSchool"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ocean Breeze High School",
+							"description": "School name"
+						},
+						{
+							"key": "address",
+							"value": "707 Coastal Highway, Miami, FL",
+							"description": "School address"
+						},
+						{
+							"key": "latitude",
+							"value": "25.7617",
+							"description": "School latitude"
+						},
+						{
+							"key": "longitude",
+							"value": "-80.1918",
+							"description": "School longitude"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://school-management-api-8q9d.onrender.com/addSchool?name&address&latitude&longitude",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://school-management-api-8q9d.onrender.com/addSchool?name=Ocean Breeze High School&address=707 Coastal Highway, Miami, FL&latitude=25.7617&longitude=-80.1918",
+							"protocol": "https",
+							"host": [
+								"school-management-api-8q9d",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"addSchool"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Ocean Breeze High School",
+									"description": "School name"
+								},
+								{
+									"key": "address",
+									"value": "707 Coastal Highway, Miami, FL",
+									"description": "School address"
+								},
+								{
+									"key": "latitude",
+									"value": "25.7617",
+									"description": "School latitude"
+								},
+								{
+									"key": "longitude",
+									"value": "-80.1918",
+									"description": "School longitude"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": [],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
